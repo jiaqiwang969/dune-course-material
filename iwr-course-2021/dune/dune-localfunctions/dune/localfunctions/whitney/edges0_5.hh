@@ -6,9 +6,9 @@
 
 #include <dune/geometry/type.hh>
 
-#include <dune/localfunctions/whitney/edges0.5/basis.hh>
-#include <dune/localfunctions/whitney/edges0.5/coefficients.hh>
-#include <dune/localfunctions/whitney/edges0.5/interpolation.hh>
+#include <dune/localfunctions/whitney/edges0_5/basis.hh>
+#include <dune/localfunctions/whitney/edges0_5/coefficients.hh>
+#include <dune/localfunctions/whitney/edges0_5/interpolation.hh>
 
 namespace Dune {
 
