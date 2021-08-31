@@ -1,0 +1,58 @@
+// Transformations:
+${CODEGEN_TRANSFORMATIONS}
+
+#include "config.h"
+
+#include <iostream>
+#include <fstream>
+#include <random>
+#include <cstdlib>
+
+#include "benchmark/benchmark.h"
+#include <dune/codegen/common/vectorclass.hh>
+#include <dune/codegen/sumfact/horizontaladd.hh>
+
+const int datasets = 512;
+
+class Benchmark{
+  ${CODEGEN_DECLARE_GLOBAL_ARGUMENTS}
+
+  ${CODEGEN_DECLARE_INPUT}
+
+public:
+  Benchmark (){
+    std::uniform_real_distribution<double> unif(0,1);
+    std::uniform_int_distribution<int> unif_int(0,1);
+    std::default_random_engine re;
+
+    ${CODEGEN_INITIALIZE_GLOBAL_ARGUMENTS}
+
+    ${CODEGEN_INITIALIZE_INPUT}
+  }
+
+  ${CODEGEN_BENCHMARK_FUNCTION}
+
+  void run_benchmark(){
+    ${CODEGEN_DECLARE_ARGUMENTS}
+
+    std::uniform_real_distribution<double> unif(0,1);
+    std::uniform_int_distribution<int> unif_int(0,1);
+    std::default_random_engine re;
+
+    ${CODEGEN_INITIALIZE_ARGUMENTS}
+
+    ${CODEGEN_CALL_BENCHMARK_FUNCTION}
+  }
+
+};
+
+static void BM_sumfact_kernel(benchmark::State& state){
+  Benchmark benchmark;
+  for (auto _ : state){
+    benchmark.run_benchmark();
+  }
+}
+
+BENCHMARK(BM_sumfact_kernel) -> Threads(atoi(std::getenv("DUNE_CODEGEN_THREADS"))) -> UseRealTime();
+
+BENCHMARK_MAIN();

@@ -1,0 +1,24 @@
+__name = verify_app_poisson_dg
+
+# Setup the grid!
+extension = 1.0 1.0 1.0
+cells = 8 8 8
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+exact_solution_expression = g
+compare_l2errorsquared = 1e-6
+
+[formcompiler.r]
+fastdg = 1
+sumfact = 1
+vectorization_quadloop = 1
+vectorization_strategy = explicit
+geometry_mixins = sumfact_equidistant
+
+[formcompiler.ufl_variants]
+cell = hexahedron
+degree = 2

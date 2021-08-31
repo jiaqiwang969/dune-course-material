@@ -1,0 +1,16 @@
+cell = hexahedron
+
+x = SpatialCoordinate(cell)
+
+g = x[0]**2 + x[1]**2 + x[2]**2
+f = -6
+
+V = FiniteElement("CG", cell, 1)
+u = TrialFunction(V)
+v = TestFunction(V)
+
+
+r = (inner(grad(u), grad(v)) - f*v)*dx
+interpolate_expression = g
+exact_solution = g
+is_dirichlet = 1

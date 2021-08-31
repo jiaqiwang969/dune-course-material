@@ -1,0 +1,29 @@
+__name = navierstokes_3d_dg_quadrilateral
+
+cells = 4 4 4
+lowerleft = -1. -1. -1.
+extension = 2. 2. 2.
+
+printmatrix = false
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+explicit_time_stepping = 0
+yaspgrid_offset = 1
+compare_l2errorsquared = 5e-4
+# Only calculate error for the velocity part
+l2error_tree_path = 1, 1, 1, 0
+operators = mass, r
+
+[formcompiler.mass]
+geometry_mixins = equidistant
+
+[formcompiler.r]
+geometry_mixins = equidistant
+
+[instat]
+T = 5e-2
+dt = 1e-2

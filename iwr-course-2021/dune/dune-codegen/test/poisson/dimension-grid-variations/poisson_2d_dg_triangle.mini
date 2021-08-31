@@ -1,0 +1,13 @@
+__name = poisson_2d_dg_triangle
+
+lowerleft = 0.0 0.0
+upperright = 1.0 1.0
+elements = 32 32
+elementType = simplical
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 5e-7

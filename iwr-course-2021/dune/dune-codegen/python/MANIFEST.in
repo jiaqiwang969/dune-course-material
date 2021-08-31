@@ -1,0 +1,4 @@
+include dune/codegen/options_driverblock.yaml
+include dune/codegen/options_form.yaml
+include dune/codegen/options_global.yaml
+include dune/codegen/logging.conf

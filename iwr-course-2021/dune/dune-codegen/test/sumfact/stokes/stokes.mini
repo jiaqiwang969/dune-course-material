@@ -1,0 +1,21 @@
+__name = sumfact_stokes_{__exec_suffix}
+
+__exec_suffix = {diff_suffix}_{quad_suffix}
+diff_suffix = numdiff, symdiff | expand num
+quad_suffix = quadvec, nonquadvec | expand quad
+
+cells = 8 8
+extension = 1. 1.
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-12
+
+[formcompiler.r]
+numerical_jacobian = 1, 0 | expand num
+vectorization_quadloop = 1, 0 | expand quad
+sumfact = 1
+geometry_mixins = sumfact_equidistant

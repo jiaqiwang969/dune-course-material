@@ -1,0 +1,15 @@
+cell = "interval"
+
+x = SpatialCoordinate(cell)
+c = (0.5-x[0])**2
+g = exp(-1.*c)
+f = 2*(1.-2*c)*g
+
+V = FiniteElement("CG", cell, 1)
+u = TrialFunction(V)
+v = TestFunction(V)
+
+r = (inner(grad(u), grad(v)) - f*v)*dx
+exact_solution = g
+is_dirichlet = 1
+interpolate_expression = g

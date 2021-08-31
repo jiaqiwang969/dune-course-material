@@ -1,0 +1,19 @@
+cell = triangle
+
+x = SpatialCoordinate(cell)
+v_bctype = conditional(x[0] < 1. - 1e-8, 1, 0)
+
+P2 = VectorElement("Lagrange", cell, 2, 2)
+P1 = FiniteElement("Lagrange", cell, 1)
+P2_stress = TensorElement("DG", cell, 1)
+
+TH = MixedElement(P2, P1, P2_stress)
+
+v, q, T  = TestFunctions(TH)
+u, p, S  = TrialFunctions(TH)
+
+r = (inner(grad(v), S) + inner(grad(u) - S, T) - div(v)*p - q*div(u))*dx
+
+is_dirichlet = v_bctype, v_bctype, 0, 0, 0, 0, 0
+interpolate_expression = 4*x[1]*(1.-x[1]), 0.0, None, None, None, None, None
+exact_solution = 4*x[1]*(1.-x[1]), 0.0, 8*(1.-x[0]), 0.0, 0.0, -1.*8*x[1] + 4., 0.0

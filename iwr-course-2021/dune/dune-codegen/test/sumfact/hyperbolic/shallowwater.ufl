@@ -1,0 +1,38 @@
+cell = quadrilateral
+x = SpatialCoordinate(cell)
+
+f = 0.2 * exp(-(pow((x[0] - 5), 2) / 2 + pow(x[1] - 5, 2) / 2)) + 1.
+
+V = FiniteElement("DG", cell, 1)
+MV = MixedElement(V, V, V)
+
+g = 10.0
+
+n = FacetNormal(cell)('+')
+
+u = TrialFunction(MV)
+v = TestFunction(MV)
+
+mass = inner(u, v)*dx
+
+h, q0, q1 = split(u)
+
+flux = as_matrix([[q0,                  q1],
+                  [h*q0*q0 + 0.5*g*h*h, h*q0*q1],
+                  [h*q0*q1,             h*q1*q1 + 0.5*g*h*h]])
+
+bflux = as_matrix([[-q0,                  -q1],
+                  [h*q0*q0 + 0.5*g*h*h, h*q0*q1],
+                  [h*q0*q1,             h*q1*q1 + 0.5*g*h*h]])
+
+
+# Define numerical fluxes to choose from
+llf_flux = dot(avg(flux), n) + 0.5*jump(u)
+boundary_flux = 0.5*dot(flux + bflux, n) + as_vector([0., q0, q1])
+numerical_flux = llf_flux
+
+r = -1. * inner(flux, grad(v))*dx \
+  + inner(numerical_flux, jump(v))*dS \
+  + inner(boundary_flux, v)*ds
+
+interpolate_expression = f, 0.0, 0.0

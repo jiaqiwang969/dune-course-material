@@ -1,0 +1,28 @@
+__name = sumfact_poisson_3d_benchmark_{__exec_suffix}
+__exec_suffix = {deg_suffix}_{quadvec_suffix}_{gradvec_suffix}
+
+deg_suffix = deg{formcompiler.ufl_variants.degree}
+quadvec_suffix = quadvec
+gradvec_suffix = autotunevec
+
+cells = 8 8 8
+extension = 1. 1. 1.
+
+[wrapper.vtkcompare]
+name = {__name}
+reference = poisson_ref
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-4
+autotune_google_benchmark = 1
+
+[formcompiler.r]
+numerical_jacobian = 0
+sumfact = 1
+vectorization_quadloop = 1
+vectorization_strategy = autotune
+geometry_mixins = sumfact_equidistant
+
+[formcompiler.ufl_variants]
+degree = 1

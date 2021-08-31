@@ -1,0 +1,14 @@
+__name = poisson_tensor
+
+lowerleft = 0.0 0.0
+upperright = 1.0 1.0
+elements = 32 32
+elementType = quadrilateral
+
+[wrapper.vtkcompare]
+name = {__name}
+reference = poisson_ref
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-7

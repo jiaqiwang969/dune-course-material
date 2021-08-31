@@ -1,0 +1,27 @@
+__name = diffusivewave_{__exec_suffix}
+
+__exec_suffix = nonsumfact, sumfact | expand sf
+
+cells = 8 8
+extension = 1. 1.
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[instat]
+dt = 0.001
+T = 0.01
+
+[formcompiler]
+operators = mass, poisson
+
+[formcompiler.mass]
+geometry_mixins = equidistant, sumfact_equidistant | expand sf
+sumfact = 0, 1 | expand sf
+fastdg = 0, 0 | expand sf
+
+[formcompiler.poisson]
+geometry_mixins = equidistant, sumfact_equidistant | expand sf
+sumfact = 0, 1 | expand sf
+fastdg = 0, 0 | expand sf

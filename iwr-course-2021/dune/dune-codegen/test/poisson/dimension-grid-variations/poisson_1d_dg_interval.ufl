@@ -1,0 +1,38 @@
+cell = "interval"
+degree = 1
+dim = 1
+
+x = SpatialCoordinate(cell)
+c = (0.5-x[0])**2
+g = exp(-1.*c)
+f = 2*(1.-2*c)*g
+
+V = FiniteElement("DG", cell, degree)
+
+u = TrialFunction(V)
+v = TestFunction(V)
+
+n = FacetNormal(cell)('+')
+
+# penalty factor
+alpha = 1.0
+h_ext = CellVolume(cell) / FacetArea(cell)
+gamma_ext = (alpha * degree * (degree + dim - 1)) / h_ext
+h_int = Min(CellVolume(cell)('+'), CellVolume(cell)('-')) / FacetArea(cell)
+gamma_int = (alpha * degree * (degree + dim - 1)) / h_int
+
+# SIPG: -1.0, IIPG: 0.0, NIPG: 1.0
+theta = 1.0
+
+r = inner(grad(u), grad(v))*dx \
+  - f*v*dx \
+  - inner(n, avg(grad(u)))*jump(v)*dS \
+  + gamma_int*jump(u)*jump(v)*dS \
+  + theta*jump(u)*inner(avg(grad(v)), n)*dS \
+  - inner(n, grad(u))*v*ds \
+  + gamma_ext*u*v*ds \
+  + theta*u*inner(grad(v), n)*ds \
+  - gamma_ext*g*v*ds \
+  - theta*g*inner(grad(v), n)*ds
+
+exact_solution = g

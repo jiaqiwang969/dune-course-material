@@ -1,0 +1,23 @@
+__name = blockstructured_preconditioner_linear_elasticity_nn
+
+cells = 4 4
+extension = 1. 1.
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+operators = r
+
+[formcompiler.r]
+blockstructured = 1
+number_of_blocks = 8
+generate_jacobians = 1
+generate_jacobian_apply = 1
+geometry_mixins = blockstructured_equidistant
+blockstructured_preconditioner = nn
+
+[formcompiler.ufl_variants]
+cell = quadrilateral
+degree = 1
