@@ -27,7 +27,7 @@ CXXFLAGS="-O3 -DNDEBUG"
 fi
 CFLAGS="$CXXFLAGS"
 if [ ! "$MAKE_FLAGS" ]; then
-MAKE_FLAGS="-j2"
+MAKE_FLAGS="-j20"
 fi
 
 # To avoid an ugly cmake bug we expand our compiler variables to absolute paths
