@@ -18,7 +18,7 @@
 如果遇到问题，请及时反馈： 
 上传issues或联系QQ 3390579731
 
-额外可选安装包：superlu(for 案例09)，latex、LatexMk（for doc）
+额外可选安装包：pygments、superlu(for 案例09)，latex、LatexMk（for doc）
 
 以下暂未测试：
  * dune-python
@@ -42,11 +42,7 @@
  * Eigen3
 
 修复(改进)的一些问题：
-- 打包操作：tar -zcvf iwr-course-2021.tar.gz iwr-course-2021
-- 额外安装：sudo apt install libsuperlu-dev/brew install superlu  ---> in order to use:  Dune::PDELab::ISTLBackend_SEQ_SuperLU in tuturial09
-- 文档生成条件：install Latex for new-made doc
 - codegen-m1: change tsc file: rdtsc-->chrono 
-- 为生成tutorial09-pdf: brew install pygments 
 - latex文档：\usepackage{scrpage2}--》\usepackage{scrlayer-scrpage}
 
 
