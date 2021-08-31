@@ -1,0 +1,19 @@
+__name = stokes_{__exec_suffix}
+__exec_suffix = symdiff, numdiff | expand num
+
+lowerleft = 0.0 0.0
+upperright = 1.0 1.0
+elements = 16 16
+elementType = simplical
+printmatrix = false
+
+[wrapper.vtkcompare]
+name = {__name}
+reference = hagenpoiseuille_ref
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-10
+
+[formcompiler.r]
+numerical_jacobian = 0, 1 | expand num

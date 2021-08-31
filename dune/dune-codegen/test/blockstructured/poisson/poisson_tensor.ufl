@@ -1,0 +1,16 @@
+x = SpatialCoordinate(cell)
+
+I = Identity(dim)
+A = as_matrix([[x[i]*x[j] + I[i,j] for j in range(dim)] for i in range(dim)])
+g = sum([c**2 for c in x])
+c = 6. + (dim - 1) * 2
+f = - 2. * dim
+
+V = FiniteElement("CG", cell, 1)
+u = TrialFunction(V)
+v = TestFunction(V)
+
+r = (inner(A*grad(u), grad(v)) + c*u*v -f*v)*dx
+interpolate_expression = g
+exact_solution = g
+is_dirichlet = 1

@@ -1,0 +1,30 @@
+__name = sumfact_poisson_fastdg_volumes_3d_benchmark_{__exec_suffix}
+__exec_suffix = {deg_suffix}_{quadvec_suffix}_{gradvec_suffix}
+
+deg_suffix = deg{formcompiler.ufl_variants.degree}
+quadvec_suffix = quadvec
+gradvec_suffix = autotunevec
+
+cells = 8 8 8
+extension = 1. 1. 1.
+
+[wrapper.vtkcompare]
+name = {__name}
+reference = poisson_ref
+extension = vtu
+
+[formcompiler]
+# Since this test makes a DG scheme without skeletons the solution is garbage.
+# This test just tests generation of microbenchmarks.
+# compare_l2errorsquared = 1e-4
+autotune_google_benchmark = 1
+
+[formcompiler.r]
+sumfact = 1
+vectorization_quadloop = 1
+vectorization_strategy = autotune
+fastdg = 1
+geometry_mixins = sumfact_equidistant
+
+[formcompiler.ufl_variants]
+degree = 1

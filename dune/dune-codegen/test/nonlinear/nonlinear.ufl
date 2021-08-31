@@ -1,0 +1,16 @@
+cell = "triangle"
+x = SpatialCoordinate(cell)
+
+mu = 2.
+f = -4. + mu * (x[0]*x[0] + x[1]*x[1])* (x[0]*x[0] + x[1]*x[1])
+g = x[0]*x[0] + x[1]*x[1]
+
+V = FiniteElement("CG", cell, 1)
+u = TrialFunction(V)
+v = TestFunction(V)
+
+r = (inner(grad(u), grad(v)) + mu*u*u*v - f*v)*dx
+
+exact_solution = g
+interpolate_expression = g
+is_dirichlet = 1

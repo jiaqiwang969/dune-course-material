@@ -1,0 +1,18 @@
+__name = poisson_customfunction_{__exec_suffix}
+__exec_suffix = numdiff, symdiff | expand num
+
+lowerleft = 0.0 0.0
+upperright = 1.0 1.0
+elements = 32 32
+elementType = simplical
+
+[wrapper.vtkcompare]
+name = {__name}
+reference = poisson_ref
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-7
+
+[formcompiler.r]
+numerical_jacobian = 1, 0 | expand num

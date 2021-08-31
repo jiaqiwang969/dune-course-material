@@ -1,0 +1,14 @@
+cell = "tetrahedron"
+
+x = SpatialCoordinate(cell)
+f = -6.
+g = x[0]*x[0] + x[1]*x[1] + x[2]*x[2]
+
+V = FiniteElement("CG", "tetrahedron", 1)
+u = TrialFunction(V)
+v = TestFunction(V)
+
+r = (inner(grad(u), grad(v)) - f*v)*dx
+exact_solution = g
+is_dirichlet = 1
+interpolate_expression = g

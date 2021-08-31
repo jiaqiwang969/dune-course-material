@@ -1,0 +1,21 @@
+__name = sumfact_mass_sliced
+
+cells = 1 1 1
+extension = 1. 1. 1.
+
+printmatrix = true
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler.r]
+numerical_jacobian = 1
+vectorization_strategy = explicit
+vectorization_horizontal = 1
+vectorization_vertical = 4
+sumfact = 1
+geometry_mixins = sumfact_equidistant
+
+[formcompiler.ufl_variants]
+degree = 3

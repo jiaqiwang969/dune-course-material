@@ -1,0 +1,14 @@
+__name = poisson_2d_cg_quadrilateral
+
+cells = 32 32
+extension = 1. 1.
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 9e-8
+
+[formcompiler.r]
+geometry_mixins = equidistant

@@ -1,0 +1,25 @@
+__name = sumfact_poisson_fastdg_3d_{__exec_suffix}
+__exec_suffix = {quadvec_suffix}_{gradvec_suffix}
+
+quadvec_suffix = quadvec, nonquadvec | expand quadvec
+gradvec_suffix = gradvec, nongradvec | expand gradvec
+
+cells = 8 8 8
+extension = 1. 1. 1.
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-4
+
+[formcompiler.r]
+sumfact = 1
+vectorization_quadloop = 1, 0 | expand quadvec
+vectorization_strategy = explicit, none | expand gradvec
+fastdg = 1
+geometry_mixins = sumfact_equidistant
+
+[formcompiler.ufl_variants]
+degree = 2

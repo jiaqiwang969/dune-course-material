@@ -1,0 +1,5 @@
+add_subdirectory(hyperbolic)
+add_subdirectory(mass)
+add_subdirectory(poisson)
+add_subdirectory(stokes)
+add_subdirectory(preconditioner)
