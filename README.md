@@ -25,7 +25,7 @@ dune-alugrid            dune-functions          dune-istl               dune-pde
 dune-codegen            dune-geometry           dune-localfunctions     dune-python-env         dune-uggrid
 dune-common             dune-grid               dune-pdelab             dune-testtools
 
-以下暂未测试：
+以下暂未测试(后续有机会再测试)：
  * dune-python
  * Inkscape, converts SVG images, <www.inkscape.org>
    To generate the documentation with LaTeX
