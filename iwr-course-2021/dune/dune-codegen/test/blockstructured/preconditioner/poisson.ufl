@@ -1,0 +1,14 @@
+x = SpatialCoordinate(cell)
+
+g = sum([c**2 for c in x])
+f = sum([-2 for _ in x])
+
+V = FiniteElement("CG", cell, degree)
+u = TrialFunction(V)
+v = TestFunction(V)
+
+r = (inner(grad(u), grad(v)) - f*v)*dx
+interpolate_expression = g
+exact_solution = g
+is_dirichlet = 1
+coarse_space = FiniteElement("CG", cell, 1)

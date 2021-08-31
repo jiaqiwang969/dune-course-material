@@ -1,0 +1,29 @@
+x = SpatialCoordinate(cell)
+
+dim = as_domain(cell).geometric_dimension()
+
+youngs_modulus = 200e9
+poisson_coeff = 0.3
+
+mu = 3 * youngs_modulus * (1 - 2 * poisson_coeff) / (2 * (1 + poisson_coeff))
+lmd = 3 * youngs_modulus * poisson_coeff / (1 + poisson_coeff)
+rho = 7800
+g = 9.81
+
+f = as_vector((0.,) * (dim - 1) + (-rho * g,))
+
+bctype = conditional(abs(x[0]) < 1e-10, 1, 0)
+
+V = VectorElement("CG", cell, degree)
+u = TrialFunction(V)
+v = TestFunction(V)
+
+def eps(u):
+    return 0.5 * (nabla_grad(u) + nabla_grad(u).T)
+
+def sigma(u):
+    return lmd * nabla_div(u) * Identity(dim) + 2 * mu * eps(u)
+
+r = (inner(sigma(u), eps(v)) - dot(f, v))*dx
+interpolate_expression = (0.,) * dim
+is_dirichlet = (bctype,) * dim

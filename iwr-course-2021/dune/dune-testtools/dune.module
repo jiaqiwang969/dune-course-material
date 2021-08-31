@@ -1,0 +1,11 @@
+################################
+# Dune module information file #
+################################
+
+#Name of the module
+Module: dune-testtools
+Version: 3.0git
+Maintainer: dominic.kempf@iwr.uni-heidelberg.de;timo.koch@iws.uni-stuttgart.de
+#depending on
+Depends: dune-common
+Suggests: dune-grid dune-alugrid

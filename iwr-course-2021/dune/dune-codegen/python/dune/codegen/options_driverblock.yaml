@@ -1,0 +1,36 @@
+classname:
+    type: string
+    default:
+    nullable: True
+    helpstr: "The name of the C++ class to generate"
+filename:
+    type: string
+    default:
+    nullable: True
+    helpstr: "The filename to use for this LocalOperator"
+spatial_form:
+    type: string
+    default:
+    nullable: True
+    helpstr: "Name of the spatial form in the UFL file."
+temporal_form:
+    type: string
+    default:
+    nullable: True
+    helpstr: "Name of the temporal form in the UFL file."
+is_dirichlet:
+    type: string
+    default: "is_dirichlet"
+    helpstr: "Name of an expression in the UFL file. This tells where to use dirichlet boundary constraints."
+interpolate_expression:
+    type: string
+    default: "interpolate_expression"
+    helpstr: "Name of an expression in the UFL file. This will be interpolated into the coefficient vector. Can be used to set boundary conditions and initial value for instationary problems."
+exact_solution:
+    type: string
+    default: "exact_solution"
+    helpstr: "Name of an expression in the UFL file. Will be used as exact solution for automated testing."
+coarse_space:
+    type: string
+    default: "coarse_space"
+    helpstr: "Name of an expression in the UFL file. This will be used as the coarse space for two level preconditioner."

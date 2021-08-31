@@ -1,0 +1,24 @@
+__name = blockstructured_poisson_matrix_free
+
+cells = 20 20
+extension = 1. 1.
+
+[wrapper.vtkcompare]
+name = {__name}
+reference = poisson_ref
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-7
+
+[formcompiler.r]
+matrix_free = 1
+blockstructured = 1
+generate_jacobians = 0
+number_of_blocks = 4
+geometry_mixins = blockstructured_equidistant
+apply_cse = licm
+
+[formcompiler.ufl_variants]
+cell = quadrilateral
+degree = 2

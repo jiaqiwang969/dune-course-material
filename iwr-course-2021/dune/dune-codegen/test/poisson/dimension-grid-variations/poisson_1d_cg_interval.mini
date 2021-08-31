@@ -1,0 +1,11 @@
+__name = poisson_1d_cg_interval
+
+cells = 32
+extension = 1.
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 5e-8

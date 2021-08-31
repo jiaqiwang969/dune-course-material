@@ -1,0 +1,39 @@
+cell = hexahedron
+dim = 3
+
+x = SpatialCoordinate(cell)
+I = Identity(3)
+A = as_matrix([[x[i]*x[j] + I[i,j] for j in range(3)] for i in range(3)])
+g = x[0]**2 + x[1]**2 + x[2]**2
+c = 10.
+f = -6.
+
+V = FiniteElement("DG", cell, degree)
+
+u = TrialFunction(V)
+v = TestFunction(V)
+
+n = FacetNormal(cell)('+')
+
+# penalty factor
+alpha = 1.0
+h_ext = CellVolume(cell) / FacetArea(cell)
+gamma_ext = (alpha * degree * (degree + dim - 1)) / h_ext
+h_int = Min(CellVolume(cell)('+'), CellVolume(cell)('-')) / FacetArea(cell)
+gamma_int = (alpha * degree * (degree + dim - 1)) / h_int
+
+# SIPG: -1.0, IIPG: 0.0, NIPG: 1.0
+theta = 1.0
+
+r = inner(A*grad(u), grad(v))*dx \
+  + (c*u-f)*v*dx \
+  + inner(n, A*avg(grad(u)))*jump(v)*dS \
+  + gamma_int*jump(u)*jump(v)*dS \
+  - theta*jump(u)*inner(A*avg(grad(v)), n)*dS \
+  - inner(n, A*grad(u))*v*ds \
+  + gamma_ext*u*v*ds \
+  + theta*u*inner(A*grad(v), n)*ds \
+  - gamma_ext*g*v*ds \
+  - theta*g*inner(A*grad(v), n)*ds
+
+exact_solution = g

@@ -1,0 +1,23 @@
+__name = coeffeval_poisson_{__exec_suffix}
+__exec_suffix = {grad_suffix}
+
+grad_suffix = grad, nongrad | expand grad
+
+lowerleft = 0.0 0.0
+upperright = 1.0 1.0
+elements = 32 32
+elementType = simplical
+
+[formcompiler]
+compare_l2errorsquared = 1e-7
+no_driver_block = 1
+
+[formcompiler.r]
+classname = PoissonLocalOperator
+filename = poisson_{grad_suffix}_localoperator.hh
+
+[formcompiler.ufl_variants]
+use_grad = 1, 0 | expand grad
+
+[__static]
+OPERATOR = 1, 0 | expand grad

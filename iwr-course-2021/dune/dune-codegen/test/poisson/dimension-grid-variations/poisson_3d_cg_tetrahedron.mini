@@ -1,0 +1,13 @@
+__name = poisson_3d_cg_tetrahedron
+
+lowerleft = 0.0 0.0 0.0
+upperright = 1.0 1.0 1.1
+elements = 8 8 8
+elementType = simplical
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-4

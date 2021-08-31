@@ -1,0 +1,24 @@
+__name = blockstructured_poisson_{__exec_suffix}
+__exec_suffix = numdiff, symdiff | expand num
+
+cells = 20 20
+extension = 1. 1.
+
+[wrapper.vtkcompare]
+name = {__name}
+reference = poisson_ref
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-7
+
+[formcompiler.r]
+numerical_jacobian = 1, 0 | expand num
+blockstructured = 1
+number_of_blocks = 3
+geometry_mixins = blockstructured_equidistant
+apply_cse = licm
+
+[formcompiler.ufl_variants]
+cell = quadrilateral
+degree = 2

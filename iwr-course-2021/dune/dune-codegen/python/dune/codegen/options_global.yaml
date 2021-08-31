@@ -1,0 +1,149 @@
+architecture:
+    type: string
+    default: "haswell"
+    helpstr: "The architecture to optimize for. Possible values: haswell|knl|skylake"
+autotune_google_benchmark:
+    type: boolean
+    default: False
+    helpstr: "Use google-benchmark library for autotuning (when autotuning is activated)."
+compare_l2errorsquared:
+    type: string
+    default:
+    nullable: True
+    helpstr: "maximal allowed l2 error squared of difference between numerical solution and interpolation of exact solution (NOTE: requires --exact-solution-expression)"
+debug_cache_with_stack:
+    type: boolean
+    default: False
+    helpstr: "Store stack along with cache objects. Makes debugging caching issues easier."
+debug_interpolate_input:
+    type: boolean
+    default: False
+    helpstr: "Should the input for printresidual and printmatix be interpolated (instead of random input)."
+driver_block_to_build:
+    type: string
+    default:
+    nullable: True
+    helpstr: "The driver block from the list that is about to be build now. CMake sets this one!!!"
+driver_blocks:
+    type: string
+    default: "default_driver_block"
+    helpstr: "A comma separated list of driver blocks. You can specify the behaviour in the section [formcompiler.driver_block.name]."
+driver_file:
+    type: string
+    default:
+    nullable: True
+    helpstr: "The filename for the generated driver header"
+exact_solution_expression:
+    type: string
+    default:
+    nullable: True
+    helpstr: "name of the exact solution expression in the ufl file"
+explicit_time_stepping:
+    type: boolean
+    default: False
+    helpstr: "use explicit time stepping"
+grid_consistent:
+    type: boolean
+    default: False
+    helpstr: "The used grid is already consistent"
+grid_info:
+    type: string
+    default:
+    nullable: True
+    helpstr: "Path to file with information about facedir and facemod variations. This can be used to limit the generation of skeleton kernels."
+grid_unstructured:
+    type: boolean
+    default: False
+    helpstr: "Set to true if you want to use an unstructured grid."
+ini_file:
+    type: string
+    default:
+    nullable: True
+    helpstr: "An inifile to use. A generated driver will be hard-coded to it, a [formcompiler] section will be used as default values to form compiler arguments (use snake case)"
+instrumentation_level:
+    type: integer
+    default: 0
+    helpstr: "Control time/opcounter measurements. 0-do nothing, 1-measure program as a whole, 2-operator applications, 3-measure kernel (eg. alpha-volume, ...), 4-parts of kernel (eg. stage 1-3 of SF)"
+l2error_tree_path:
+    type: string
+    default:
+    nullable: True
+    helpstr: "Tree pathes that should be considered for l2 error calculation. Default None means we take all of them into account."
+no_driver_block:
+    type: boolean
+    default: False
+    helpstr: "Turn off driver block generation."
+opcounter:
+    type: boolean
+    default: False
+    helpstr: "Count operations. Note: In this case only operator applications are generated since solving and operator counting does not work. You probably want to set instrumentation level>0."
+operator_to_build:
+    type: string
+    default:
+    nullable: True
+    helpstr: "The operators from the list that is about to be build now. CMake sets this one!!!"
+operators:
+    type: string
+    default: "r"
+    helpstr: "A comma separated list of operators, each name will be interpreted as a subsection name within the formcompiler section"
+overlapping:
+    type: boolean
+    default: False
+    helpstr: "Use an overlapping solver and constraints. You still need to make sure to construct a grid with overlap! The parallel option will be set automatically."
+performance_measuring:
+    type: boolean
+    default: False
+    helpstr: "Generate opcounter codepath, but only measure times!"
+permuting_horizontal_add:
+    type: boolean
+    default: True
+    helpstr: "Whether SIMD horizontal_add should use a permuting implementation."
+precision_bits:
+    type: integer
+    default: 64
+    helpstr: "The number of bits for the floating point type"
+project_basedir:
+    type: string
+    default:
+    nullable: True
+    helpstr: "The base (build) directory of the dune-codegen project"
+target_name:
+    type: string
+    default:
+    nullable: True
+    helpstr: "The target name from CMake"
+time_stepping_order:
+    type: integer
+    default: 1
+    helpstr: "Order of the time stepping method"
+uflfile:
+    type: string
+    default:
+    nullable: True
+    helpstr: "the UFL file to compile"
+use_likwid:
+    type: boolean
+    default: False
+    helpstr: "Use likwid instead of own performance measurements."
+use_sde:
+    type: boolean
+    default: False
+    helpstr: "Use sde instead of own performance measurements."
+with_mpi:
+    type: boolean
+    default: True
+    helpstr: "The module was configured with mpi"
+yaspgrid_offset:
+    type: boolean
+    default: False
+    helpstr: "Set to true if you want a yasp grid where the lower left corner is not in the origin."
+
+# Arguments that are mainly to be set by logic depending on other options
+max_vector_width:
+    type: integer
+    default: 256
+    helpstr: None
+parallel:
+    type: boolean
+    default: False
+    helpstr: "Mark that this program should be run in parallel. If set to true the c++ code will check that there are more than 1 MPI-ranks involved and the error computation will use communication."
