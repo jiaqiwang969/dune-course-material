@@ -1,3 +1,0 @@
-x = 1, 2 | expand
-y = 1
-{x} == {y} | exclude

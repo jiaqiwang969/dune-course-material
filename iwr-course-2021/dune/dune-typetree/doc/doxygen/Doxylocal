@@ -1,5 +1,0 @@
-INPUT   += @srcdir@/mainpage.txt \
-           @srcdir@/modules.txt \
-           @top_srcdir@/dune
-EXCLUDE += @top_srcdir@/test
-EXTRA_PACKAGES = amsmath

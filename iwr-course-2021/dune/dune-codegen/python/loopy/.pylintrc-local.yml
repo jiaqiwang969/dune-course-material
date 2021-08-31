@@ -1,6 +1,0 @@
-- arg: extension-pkg-whitelist
-  val: islpy
-- arg: ignore
-  val: compyte
-- arg: init-hook
-  val: sys.setrecursionlimit(5000)
