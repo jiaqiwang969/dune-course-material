@@ -1,8 +1,0 @@
-cell = "quadrilateral"
-
-V = FiniteElement("DG", cell, 1)
-
-u = TrialFunction(V)
-v = TestFunction(V)
-
-r = u * v * dx

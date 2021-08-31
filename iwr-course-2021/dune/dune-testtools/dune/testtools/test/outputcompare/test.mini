@@ -1,5 +1,0 @@
-[wrapper.outputtreecompare]
-type = fuzzy
-name = test
-reference = test
-extension = out

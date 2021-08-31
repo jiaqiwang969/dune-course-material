@@ -1,1 +1,0 @@
-install(FILES DuneUggridMacros.cmake DESTINATION ${DUNE_INSTALL_MODULEDIR})

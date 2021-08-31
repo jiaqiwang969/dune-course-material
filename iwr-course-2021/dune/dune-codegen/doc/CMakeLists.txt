@@ -1,1 +1,0 @@
-dune_cmake_sphinx_doc(MODULE_ONLY)
