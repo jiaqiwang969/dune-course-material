@@ -1,6 +1,0 @@
-# ignore all build folders
-/build*/
-# ignore backup files
-*~
-# ignore Python files
-*.pyc

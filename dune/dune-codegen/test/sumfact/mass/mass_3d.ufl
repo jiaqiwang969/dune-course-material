@@ -1,8 +1,0 @@
-cell = "hexahedron"
-
-V = FiniteElement("DG", cell, degree)
-
-u = TrialFunction(V)
-v = TestFunction(V)
-
-r = u * v * dx

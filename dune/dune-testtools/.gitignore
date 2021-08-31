@@ -1,6 +1,0 @@
-build-cmake
-*.pyc
-*~
-#*#
-.cache/
-python/.cache/
