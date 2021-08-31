@@ -10,7 +10,7 @@
 
 测试通过环境：
 
-✅ubuntu-18.04
+✅ubuntu-18.04-x86
 
 ✅apple m1-arm64
 
@@ -19,6 +19,11 @@
 上传issues或联系QQ 3390579731
 
 额外可选安装包：pygments、superlu(for 案例09)，latex、LatexMk（for doc）
+
+已安装：
+dune-alugrid            dune-functions          dune-istl               dune-pdelab-tutorials   dune-typetree
+dune-codegen            dune-geometry           dune-localfunctions     dune-python-env         dune-uggrid
+dune-common             dune-grid               dune-pdelab             dune-testtools
 
 以下暂未测试：
  * dune-python
