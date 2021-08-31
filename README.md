@@ -1,7 +1,7 @@
 # dune-course-material
 
 
-这是[DUNE的课程](https://heibox.uni-heidelberg.de/d/1860f3cd05d84a20b3b1/)的一部分，是专门从虚拟机从抽离出来的。
+这是[DUNE的课程](https://heibox.uni-heidelberg.de/d/1860f3cd05d84a20b3b1/)的一部分，是专门从虚拟机中抽离出来的。
 
 
 目的: 为了让其能够适应于不同的编译环境, 帮助避坑。
