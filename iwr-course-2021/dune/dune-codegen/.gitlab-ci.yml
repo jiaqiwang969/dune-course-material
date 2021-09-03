@@ -1,0 +1,62 @@
+---
+stages:
+  - quick_tests
+  - full_tests
+
+variables:
+  GIT_STRATEGY: clone
+  GIT_SUBMODULE_STRATEGY: recursive
+  HYPERTHREADING: "false"
+  OMP_NUM_THREADS: "1"
+  DUNECI_CXXFLAGS: "-march=native -w"
+  DUNECI_CMAKE_FLAGS: "-DDUNE_PYTHON_VIRTUALENV_SETUP=1"
+
+before_script:
+  - echo "Running make concurrently with ${DUNECI_PARALLEL} cores, where possibly"
+  - patches/apply_patches.sh
+  - . /duneci/bin/duneci-init-job
+  - duneci-install-module --branch releases/2.7 https://gitlab.dune-project.org/extensions/dune-alugrid.git
+  - duneci-install-module --branch releases/2.7 https://gitlab.dune-project.org/quality/dune-testtools.git
+  - duneci-install-module --branch releases/2.7 https://gitlab.dune-project.org/pdelab/dune-pdelab.git
+  - duneci-install-module --recursive https://gitlab.dune-project.org/dominic/dune-opcounter.git
+  - duneci-install-module --recursive https://gitlab.dune-project.org/marcel.koch/consistent-edge-orientation.git
+
+.quick_tests_template: &quick_tests_template
+  stage: quick_tests
+  rules:
+    - if: '$CI_MERGE_REQUEST_ID'
+  variables:
+    DUNECI_TEST_LABELS: quick
+
+.full_tests_template: &full_tests_template
+  stage: full_tests
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH =~ /releases\/*/'
+    - if: '$CI_PIPELINE_SOURCE == "web"'  # run on manual trigger
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'  # run on schedule
+    - if: '$CI_MERGE_REQUEST_ID'
+      when: manual
+
+git-debian-10-gcc-8-noassert-17:on-schedule:
+  <<: *full_tests_template
+  image: "registry.dune-project.org/docker/ci/dune:2.7-debian-10-gcc-8-17"
+  script: duneci-standard-test
+  tags:
+    - "cores:20"
+    - "perftool"
+
+git-debian-10-clang-7-libcpp-17:on-schedule:
+  <<: *full_tests_template
+  image: "registry.dune-project.org/docker/ci/dune:2.7-debian-10-clang-7-libcpp-17"
+  script: duneci-standard-test
+  tags:
+    - "cores:20"
+    - "perftool"
+
+quick-git-debian-10-clang-7-libcpp-17:
+  <<: *quick_tests_template
+  image: "registry.dune-project.org/docker/ci/dune:2.7-debian-10-clang-7-libcpp-17"
+  script: duneci-standard-test
+  tags:
+    - "cores:20"
+    - "perftool"

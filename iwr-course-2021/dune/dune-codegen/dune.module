@@ -1,0 +1,11 @@
+################################
+# Dune module information file #
+################################
+
+#Name of the module
+Module: dune-codegen
+Version: 0.0
+Maintainer: dominic.kempf@iwr.uni-heidelberg.de
+#depending on
+Depends: dune-testtools dune-pdelab dune-alugrid
+Suggests: dune-opcounter dune-uggrid consistent-edge-orientation

@@ -1,0 +1,88 @@
+(lp0
+S'%\\documentclass[ignorenonframetext,11pt]{beamer}\n\\usepackage[english]{babel}\n\\usepackage[utf8]{inputenc}\n\\usepackage{lmodern}\n\\usepackage{amsmath,amssymb,amsfonts}\n\n\n% only presentation \n\\mode<presentation>\n{\n  \\usetheme{default}\n  \\setbeamercovered{transparent}\n  \\usefonttheme{structurebold}\n  \\setbeamertemplate{theorems}[numbered]\n  \\usepackage{amscd}\n}\n\n\\usepackage{multicol}\n\\usepackage{enumerate}\n\\usepackage{color}\n\\usepackage{stmaryrd}\n\\usepackage{lmodern}\n\n\n\n\\title{DUNE PDELab Tutorial C++ Refresher}\n\\author{Olaf Ippisch}\n\\institute[]\n{\n  Institut f\xc3\xbcr Mathematik, TU Clausthal\\\\\n  Erzstr. 1, D-38678 Clausthal-Zellerfeld \\\\[6pt]\n}\n\\date[\\today]{\\today}\n\n% logo nach oben\n\\mode<presentation>\n{\n% No navigation symbols and no lower logo\n\\setbeamertemplate{sidebar right}{}\n\n% logo\n\\newsavebox{\\logobox}\n\\sbox{\\logobox}{%\n    \\hskip\\paperwidth%\n    \\rlap{%\n      % putting the logo should not change the vertical possition\n      \\vbox to 0pt{%\n        \\vskip-\\paperheight%\n        \\vskip0.35cm%\n        \\llap{\\insertlogo\\hskip0.1cm}%\n        % avoid overfull \\vbox messages\n        \\vss%\n      }%\n    }%\n}\n\n\\addtobeamertemplate{footline}{}{%\n    \\usebox{\\logobox}%\n}\n}\n\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n%\n% now comes the individual stuff lecture by lecture\n%\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n\\begin{document}'
+p1
+aS'\\begin{lstlisting}\n  g++ -o myprogram main.cc\n  \\end{lstlisting}'
+p2
+aS'\\begin{lstlisting}\n  g++ -std=c++17 -o myprogram main.cc\n  \\end{lstlisting}'
+p3
+aS'\\begin{lstlisting}\n  ./myprogram\n  \\end{lstlisting}'
+p4
+aS'\\begin{lstlisting}\n  Hello, world!\n  \\end{lstlisting}'
+p5
+aS'\\begin{lstlisting}\n  make\n  \\end{lstlisting}'
+p6
+aS'\\begin{lstlisting}\nclass Point2D {\npublic:\n  Point2D(double x_, double y_)\n    : x(x_), y(y_)\n  {}\n\n  double norm() const {\n    return sqrt(x*x + y*y);\n  }\n\n  void add(const Point2D &p) {\n    x += p.x;\n    y += p.y;\n  }\n\nprivate:\n  double x, y;\n};\n  \\end{lstlisting}'
+p7
+aS'\\begin{lstlisting}\n      // calls constructor, initialises data\n      Point2D p = Point2D(3.0,4.1); \n    \\end{lstlisting}'
+p8
+aS'\\begin{lstlisting}\n      std::cout << p.norm() << std::endl;\n    \\end{lstlisting}'
+p9
+aS'\\begin{lstlisting}\n      Point2D p2 = p; // create a copy of p\n      p.add(p2);\n    \\end{lstlisting}'
+p10
+aS'\\begin{lstlisting}\n      std::cout << p.x << std::endl; // compiler error!\n    \\end{lstlisting}'
+p11
+aS'\\begin{lstlisting}\n  namespace linsolv {\n    #include<linear_solver.h>\n  }\n  namespace nonlinsolv {\n    #include<nonlinear_solver.h>\n  }\n  int main() {\n    linsolv::solve_problem();\n    nonlinsolv::solve_problem();\n  }\n\\end{lstlisting}'
+p12
+aS'\\begin{lstlisting}\n  using namespace std;\n  \\end{lstlisting}'
+p13
+aS'\\begin{lstlisting}\n    #include <iostream>\n    #include <cmath>\n\n    int main()\n    {\n      double v = 2.0;\n      double s = sqrt(v);\n      std::cout << "The square root of " << v\n                << " is " << s << std::endl;\n    }\n  \\end{lstlisting}'
+p14
+aS'\\begin{lstlisting}\n    /* Copying */\n    auto i = 4;\n    auto j = i;  // i = 4, j = 4, j is a copy\n    i += 1;      // i = 5, j = 4\n    j -= 1;      // i = 5, j = 3\n    j  = i;      // i = 5, j = 5\n\n    /* Referencing */\n    auto &k = i; // i = 5, k = 5, k is a reference to i\n    i  = 2;      // i = 2, j = 5, k = 2\n    i += 1;      // i = 3, j = 5, k = 3\n    k  = 8;      // i = 8, j = 5, k = 8\n  \\end{lstlisting}'
+p15
+aS'\\begin{lstlisting}\n      int Square(int x)\n      {\n        return(x*x);\n      }\n\n      float Square(float x)\n      {\n        return(x*x);\n      }\n    \\end{lstlisting}'
+p16
+aS'\\begin{lstlisting}\n      long Square(long x)\n      {\n        return(x*x);\n      }\n\n      double Square(double x)\n      {\n        return(x*x);\n      }      \n    \\end{lstlisting}'
+p17
+aS'\\begin{lstlisting}\ntemplate<typename T>\nT Square(T a)\n{\n    return(a*a);\n}\n\\end{lstlisting}'
+p18
+aS'\\begin{lstlisting}\n     std::cout << Square<int>(4) << std::endl;\n \\end{lstlisting}'
+p19
+aS'\\begin{lstlisting}\n#include<cmath>\n#include<iostream>\n\ntemplate<typename T>\nT Square(T a)\n{\n    return(a*a);\n}\n\nint main()\n{\n    std::cout << Square<int>(4) << std::endl;\n    std::cout << Square<double>(M_PI) << std::endl;\n    std::cout << Square(3.14) << std::endl;\n}\n\\end{lstlisting}'
+p20
+aS'\\begin{lstlisting}\n#include<cmath>\n#include<iostream>\n\ntemplate<class U>\nconst U &max(const U &a, const U &b) {\n if (a>b)\n     return(a);\n else\n     return(b);\n}\n\nint main()\n{\n std::cout << max(1,4) << std::endl;\n std::cout << max(3.14,7.) << std::endl;\n std::cout << max(6.1,4) << std::endl; // compiler error\n std::cout << max<double>(6.1,4) << std::endl; // correct\n std::cout << max<int>(6.1,4) << std::endl;    // warning\n}\n\\end{lstlisting}'
+p21
+aS'\\begin{lstlisting}\n    auto c = std::min(a,b);\n  \\end{lstlisting}'
+p22
+aS'\\begin{lstlisting}\n    auto c = std::max(a,b);\n  \\end{lstlisting}'
+p23
+aS'\\begin{lstlisting}\n    std::swap(a,b);\n  \\end{lstlisting}'
+p24
+aS'\\begin{lstlisting}\ntemplate<typename T, int dimension = 3>\nclass NumericalSolver\n{\n    ...\n  protected:\n    T variable;\n};\n\\end{lstlisting}'
+p25
+aS'\\begin{lstlisting}\ntemplate<typename T>\nclass MyNumericalSolver : public NumericalSolver<T,3>\n{\n    T myVariable;\n  public:\n    MyNumericalSolver(T val) : NumericalSolver<T,3>(),\n                               myVariable(val)\n    {\n      std::cout << NumericalSolver<T,3>::variable\n                << std::endl;\n    };\n};\n\\end{lstlisting}'
+p26
+aS'\\begin{lstlisting}\ntemplate<typename T>\nclass MyNumericalSolver : public NumericalSolver<T,3>\n{\n    T myVariable;\n  public:\n    MyNumericalSolver(T val) : NumericalSolver<T,3>(),\n                               myVariable(val)\n    {\n        this->variable=val;\n    };\n};\n\\end{lstlisting}'
+p27
+aS'\\begin{lstlisting}\ntypedef Point2D P;\nauto coord = P(8,1); // Now P means the same as Point2D\n\\end{lstlisting}'
+p28
+aS'\\begin{lstlisting}\ntemplate <typname U>    // create partially defined templates \nusing VectorSpace = Dune::PDELab::Backend::Vector<GFS,U>::type;\n\nint main()\n{\n  using int32 = int;                  // rename ordinary types\n  using Vector = \n        typename Dune::PDELab::Backend::Vector<GFS,double>::type;\n  auto v = Vector(gfs); // Save lots of typing...\n  using Function = void (*)(double);  // function types\n  VectorSpace<float> blub;\n}\n\\end{lstlisting}'
+p29
+aS'\\begin{lstlisting}\ntemplate<typename T, int dimension = 3>\nclass NumericalSolver : public T::ClassType\n{\n    ...\n    typename T::SubType doSomething(\n                          typename T::OtherSubType argument);\n  private:\n    typename T::SubType variable;\n}\n\\end{lstlisting}'
+p30
+aS'\\begin{lstlisting}\nclass A\n{\n  public:\n    template<class T> T doSomething() { };\n};\n\ntemplate<class U> void doSomethingElse(U variable)\n{\n    char result = variable.template doSomething<char>();\n}\n\ntemplate<class U,typename V> V doSomethingMore(U *variable)\n{\n    return variable->template doSomething<V>();\n}\n\\end{lstlisting}'
+p31
+aS'\\begin{lstlisting}\n#include <iostream>\n#include <vector>\n\nint main()\n{\n    auto b = std::vector<double>(7); // a vector for 7 doubles\n    std::cout << b.size() << std::endl; // output the size\n    for (int i = 0; i < b.size() ; ++i)\n        b[i] = i*0.1; // assign some data\n    auto c = b; // create a copy, automatically copying all data\n    c.resize(15); // Make c bigger\n    std::cout << b.size() << std::endl; // still 7\n    b.push_back(3.8); // make b larger and append the value 3.8\n}\n\\end{lstlisting}'
+p32
+aS'\\begin{lstlisting}\n    auto vec = std::vector<double>(8);\n    for (auto d : vec)\n      std::cout << d << std::endl; // prints all entries of vec\n  \\end{lstlisting}'
+p33
+aS'\\begin{lstlisting}\n    #include<iostream>\n    #include<vector>\n\n    int main()\n    {\n      std::vector<double> x(5);\n      int i=0;\n      for (auto &y : x) {       // with reference\n        y = i * 1.2;            // can be changed\n        ++i;\n      }\n      for (auto y : x) {        // with copy\n        y *= y;                 // original container unchanged\n        std::cout << y << std::endl;\n      }\n    }\n  \\end{lstlisting}'
+p34
+aS'\\begin{lstlisting}\nint a,b;\ndecltype(a+b) c;\n\\end{lstlisting}'
+p35
+aS'\\begin{lstlisting}\ntemplate<typename Vector>\nauto squareroot_values(const Vector& v)\n{\n  using R = decltype(sqrt(v[0])); // result type of std::sqrt()\n  auto result = std::vector<R>();\n  for (auto d : v)           // create a vector of square roots\n    result.push_back(std::sqrt(d)); \n  return result;\n}\n\\end{lstlisting}'
+p36
+aS'\\begin{lstlisting}\ntemplate<typename T, typename U>\nauto add(T t, U u) -> decltype(t + u);\n\\end{lstlisting}'
+p37
+aS'\\begin{lstlisting}\nauto f = [](auto x) -> double \n{\n  double y = x;\n  return std::sin(y);\n};\n\\end{lstlisting}'
+p38
+aS'\\begin{lstlisting}\nauto f = [](auto x) { return std::sin(x); };\n\\end{lstlisting}'
+p39
+aS'\\begin{lstlisting}\nauto pi = 3.14;\nauto f = [pi](auto x) { return pi * x; };\nauto g = [&pi](auto x) { return pi * x; };\nf(1); // returns 3.14;\ng(1); // returns 3.14;\npi = 3.141;\nf(1); // returns 3.14 - value was copied!\ng(1); // returns 3.141 - value was referenced!\n\nint call_count = 0;\nauto h = [&](auto x) \n{\n  ++call_count;\n  return pi + x;\n}\nh(1); // returns 4.141\nstd::cout << call_count << std::endl; // prints 1\n\\end{lstlisting}'
+p40
+aS'\\begin{lstlisting}\nauto coll = std::vector<double>();\n// fill coll with data...\nint count = 0;\ndouble sum = 0;\nstd::for_each(coll.begin(),coll.end(),\n              [&](auto x){ ++count; sum += x; } );\nstd::cout << sum / count << std::endl;\n  \\end{lstlisting}'
+p41
+aS'\\begin{thebibliography}{Vandervoorde and Josuttis(2003)}\n\n\\bibitem[Stroustrup (2014)]{stroustrup13:cpp_programming}\nBjarne Stroustrup.\n\\newblock \\emph{Programming: Principles and Practice Using C++}.\n\\newblock Addison Wesley, 2014.\n\n\\bibitem[Stroustrup(2013)]{stroustrup13:cpp_language}\nBjarne Stroustrup.\n\\newblock \\emph{The C++ Programming Language}.\n\\newblock Addison Wesley, 2013.\n\n\\bibitem[cppreference.comm]{cppreference}\nThe cppreference community.\n\\newblock \\emph{The community C++ reference web site.}\n\\newblock \\alert<2>{\\url{http://cppreference.com}}.\n\n\\end{thebibliography}'
+p42
+aS'\\end{document}\n\n'
+p43
+a.

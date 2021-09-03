@@ -1,0 +1,71 @@
+From 88db18150dc45225065fcef9794af9ba5fbbbfd8 Mon Sep 17 00:00:00 2001
+From: Sebastian Hegmann <shegmann@nina.iwr.uni-heidelberg.de>
+Date: Thu, 1 Aug 2019 11:35:14 +0200
+Subject: [PATCH] fix parameter
+
+---
+ loopy/symbolic.py | 34 +++++++++++++++++-----------------
+ 1 file changed, 17 insertions(+), 17 deletions(-)
+
+diff --git a/loopy/symbolic.py b/loopy/symbolic.py
+index 0cc8f4ba..bd9879bd 100644
+--- a/loopy/symbolic.py
++++ b/loopy/symbolic.py
+@@ -127,37 +127,37 @@ class PartialEvaluationMapper(
+ 
+ 
+ class WalkMapper(WalkMapperBase):
+-    def map_literal(self, expr, *args):
+-        self.visit(expr)
++    def map_literal(self, expr, *args, **kwargs):
++        self.visit(expr, *args, **kwargs)
+ 
+-    def map_array_literal(self, expr, *args):
+-        if not self.visit(expr):
++    def map_array_literal(self, expr, *args, **kwargs):
++        if not self.visit(expr, *args, **kwargs):
+             return
+ 
+         for ch in expr.children:
+-            self.rec(ch, *args)
++            self.rec(ch, *args, **kwargs)
+ 
+-    def map_group_hw_index(self, expr, *args):
+-        self.visit(expr)
++    def map_group_hw_index(self, expr, *args, **kwargs):
++        self.visit(expr, *args, **kwargs)
+ 
+-    def map_local_hw_index(self, expr, *args):
+-        self.visit(expr)
++    def map_local_hw_index(self, expr, *args, **kwargs):
++        self.visit(expr, *args, **kwargs)
+ 
+-    def map_reduction(self, expr, *args):
+-        if not self.visit(expr):
++    def map_reduction(self, expr, *args, **kwargs):
++        if not self.visit(expr, *args, **kwargs):
+             return
+ 
+-        self.rec(expr.expr, *args)
++        self.rec(expr.expr, *args, **kwargs)
+ 
+-    def map_type_cast(self, expr, *args):
+-        if not self.visit(expr):
++    def map_type_cast(self, expr, *args, **kwargs):
++        if not self.visit(expr, *args, **kwargs):
+             return
+-        self.rec(expr.child, *args)
++        self.rec(expr.child, *args, **kwargs)
+ 
+     map_tagged_variable = WalkMapperBase.map_variable
+ 
+-    def map_loopy_function_identifier(self, expr, *args):
+-        self.visit(expr)
++    def map_loopy_function_identifier(self, expr, *args, **kwargs):
++        self.visit(expr, *args, **kwargs)
+ 
+     map_linear_subscript = WalkMapperBase.map_subscript
+ 
+-- 
+2.14.3
+

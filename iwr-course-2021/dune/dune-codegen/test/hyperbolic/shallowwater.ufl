@@ -1,0 +1,35 @@
+cell = interval
+x = SpatialCoordinate(cell)
+
+f = conditional(x[0] <= 5., 0.005, 0.001)
+
+V = FiniteElement("DG", cell, 1)
+MV = MixedElement(V, V)
+
+g = 10.0
+
+n = FacetNormal(cell)('+')
+
+u = TrialFunction(MV)
+v = TestFunction(MV)
+
+mass = inner(u, v)*dx
+
+h, q = split(u)
+
+flux = as_matrix([[q], [q*q/h + 0.5*g*h*h]])
+
+b_flux = as_matrix([[-1.* q], [q*q/h + 0.5*g*h*h]])
+
+# Define numerical fluxes to choose from
+alpha = Max(abs(n[0]*q('+')) / h('+') + sqrt(g*h('+')), abs(n[0]*q('-')) / h('-') + sqrt(g*h('-')))
+llf_flux = dot(avg(flux), n) + 0.5*alpha*jump(u)
+alpha_b = abs(n[0]*q) / h + sqrt(g*h)
+boundary_flux = 0.5*dot(flux + b_flux, n) + alpha_b * as_vector([0., q])
+numerical_flux = llf_flux
+
+r = -1. * inner(flux, grad(v))*dx \
+  + inner(numerical_flux, jump(v))*dS \
+  + inner(boundary_flux, v)*ds
+
+interpolate_expression = f, 0.0

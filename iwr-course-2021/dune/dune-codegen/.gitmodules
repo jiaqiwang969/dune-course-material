@@ -1,0 +1,18 @@
+[submodule "python/loopy"]
+	path = python/loopy
+	url = https://gitlab.tiker.net/inducer/loopy.git
+[submodule "python/ufl"]
+	path = python/ufl
+	url = https://bitbucket.org/fenics-project/ufl.git
+[submodule "python/pymbolic"]
+	path = python/pymbolic
+	url = https://github.com/inducer/pymbolic.git
+[submodule "python/cgen"]
+	path = python/cgen
+	url = https://github.com/inducer/cgen.git
+[submodule "dune/codegen/vectorclass"]
+	path = dune/codegen/vectorclass
+	url = https://github.com/vectorclass/version2.git
+[submodule "python/pytools"]
+	path = python/pytools
+	url = https://github.com/inducer/pytools.git

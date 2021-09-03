@@ -1,0 +1,20 @@
+cell = triangle
+
+x = SpatialCoordinate(cell)
+
+V = FiniteElement("CG", cell, 1)
+u = TrialFunction(V)
+v = TestFunction(V)
+
+g = x[0]*x[0] + x[1]*x[1]
+A = as_matrix([[variable(1.0), variable(0.5)],[variable(1.2), variable(3.0)]])
+b = as_vector([variable(2.0), variable(4.2)])
+c = as_vector([-2.8, 1.7])
+f = variable(-4.0)
+
+r = (inner(A*grad(u), grad(v)) + inner(c,b)*u*v - f*v)*dx
+forms = [r]
+
+J = inner(u,u)*dx
+interpolate_expression = g
+is_dirichlet = 1

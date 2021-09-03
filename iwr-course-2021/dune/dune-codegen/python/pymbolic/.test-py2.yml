@@ -1,0 +1,13 @@
+name: py2
+channels:
+ - symengine
+ - conda-forge
+ - defaults
+dependencies:
+ - pexpect
+ - pytools
+ - conda-forge::numpy
+ - conda-forge::sympy
+ - python=2.7
+ - symengine::python-symengine=0.3.0
+ - maxima

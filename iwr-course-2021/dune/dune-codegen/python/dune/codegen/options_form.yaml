@@ -1,0 +1,229 @@
+accumulation_mixins:
+    type: string
+    default: "generic"
+    helpstr: "A comma separated list of mixin identifiers to use for accumulation. Currently implemented: generic, sumfact, control, blockstructured"
+adjoint:
+    type: boolean
+    default: False
+    helpstr: "Generate adjoint operator"
+apply_cse:
+    type: string
+    default:
+    nullable: True
+    helpstr: "Whether to apply a CSE algorithm, options: simple, licm"
+basis_mixins:
+    type: string
+    default: "generic"
+    helpstr: "A comma separated list of mixin identifiers to use for basis function evaluation. Currently implemented: generic, sumfact"
+block_preconditioner_diagonal:
+    type: boolean
+    default: False
+    helpstr: "Whether this operator should implement the diagonal part of a block preconditioner"
+block_preconditioner_offdiagonal:
+    type: boolean
+    default: False
+    helpstr: "Whether this operator should implement the off-diagonal part of a block preconditioner"
+block_preconditioner_pointdiagonal:
+    type: boolean
+    default: False
+    helpstr: "Whether this operator should implement the point diagonal part of a block preconditioner"
+blockstructured:
+    type: boolean
+    default: False
+    helpstr: "Use block structure"
+blockstructured_preconditioner:
+    type: string
+    default:
+    nullable: True
+    helpstr: "Generate two level preconditioner, possible values: [neumann|nn], jacobi"
+blockstructured_prioritize_quad_loop:
+    type: boolean
+    default: False
+    helpstr: "Prioritize the quadrature loop over the subelement loop."
+classname:
+    type: string
+    default:
+    nullable: True
+    helpstr: "The name of the C++ class to generate"
+constant_transformation_matrix:
+    type: boolean
+    default: False
+    helpstr: "set option if the jacobian of the transformation is constant on a cell"
+control:
+    type: boolean
+    default: False
+    helpstr: "Generate operator of derivative w.r.t. the control variable"
+control_variable:
+    type: string
+    default:
+    nullable: True
+    helpstr: "Name of control variable in UFL file"
+diagonal_transformation_matrix:
+    type: boolean
+    default: False
+    helpstr: "set option if the jacobian of the transformation is diagonal (axiparallel grids)"
+enable_boundary:
+    type: boolean
+    default: True
+    helpstr: "Whether to assemble boundary integrals"
+enable_skeleton:
+    type: boolean
+    default: True
+    helpstr: "Whether to assemble skeleton integrals"
+enable_volume:
+    type: boolean
+    default: True
+    helpstr: "Whether to assemble volume integrals"
+fastdg:
+    type: boolean
+    default: False
+    helpstr: "Use FastDGGridOperator from PDELab."
+filename:
+    type: string
+    default:
+    nullable: True
+    helpstr: "The filename to use for this LocalOperator"
+form:
+    type: string
+    default:
+    nullable: True
+    helpstr: "The name of the UFL object representing the form in the UFL file"
+generate_jacobian_apply:
+    type: boolean
+    default: False
+    helpstr: "Wether jacobian_allpy_* methods should be generated."
+generate_jacobians:
+    type: boolean
+    default: True
+    helpstr: "Whether jacobian_* methods should be generated. This is set to false automatically, when numerical_jacobian is set to true."
+generate_residuals:
+    type: boolean
+    default: True
+    helpstr: "Whether alpha_* methods should be generated."
+geometry_mixins:
+    type: string
+    default: "generic"
+    helpstr: "A comma separated list of mixin identifiers to use for geometries. Currently implemented mixins: generic, axiparallel, equidistant, sumfact_multilinear, sumfact_axiparallel, sumfact_equidistant"
+matrix_free:
+    type: boolean
+    default: False
+    helpstr: "Generate jacobian_apply_* methods for matrix free solvers"
+number_of_blocks:
+    type: integer
+    default: 1
+    helpstr: "Number of sub blocks in one direction"
+numerical_jacobian:
+    type: boolean
+    default: False
+    helpstr: "use numerical jacobians (only makes sense, if uflpdelab for some reason fails to generate analytic jacobians)"
+objective_function:
+    type: string
+    default:
+    nullable: True
+    helpstr: "Name of form representing the objective function in UFL file"
+print_transformations:
+    type: boolean
+    default: False
+    helpstr: "print out dot files after ufl tree transformations"
+print_transformations_dir:
+    type: string
+    default: "."
+    helpstr: "place where to put dot files (can be omitted)"
+quadrature_mixins:
+    type: string
+    default: "generic"
+    helpstr: "A comma separated list of mixin identifiers to use for quadrature. Currently implemented: generic, sumfact"
+quadrature_order:
+    type: string
+    default:
+    nullable: True
+    helpstr: "Quadrature order used for all integrals."
+simplify:
+    type: boolean
+    default: False
+    helpstr: "Whether to simplify expressions using sympy"
+sumfact:
+    type: boolean
+    default: False
+    helpstr: "Use sumfactorization"
+sumfact_on_boundary:
+    type: boolean
+    default: True
+    helpstr: "Whether boundary integrals should be vectorized. It might not be worth the hassle..."
+sumfact_optimize_loop_order:
+    type: boolean
+    default: False
+    helpstr: "Optimize order of loops in sumf factorization function using autotuning."
+sumfact_performance_transformations:
+    type: boolean
+    default: False
+    helpstr: "Apply sum factorization specific performance transformations."
+sumfact_performance_transformations_testrun:
+    type: integer
+    default: 0
+    helpstr: "If larger than zero determines test case to run."
+sumfact_regular_jacobians:
+    type: boolean
+    default: False
+    helpstr: "Generate non sum-factorized jacobians (only useful if sumfact is set)"
+unroll_dimension_loops:
+    type: boolean
+    default: False
+    helpstr: "whether loops over the geometric dimension should be unrolled"
+vectorization_allow_quadrature_changes:
+    type: boolean
+    default: False
+    helpstr: "whether the vectorization strategy is allowed to alter quadrature point numbers"
+vectorization_blockstructured:
+    type: boolean
+    default: False
+    helpstr: "Vectorize block structuring"
+vectorization_blockstructured_tail:
+    type: boolean
+    default: True
+    helpstr: "Try to fully vectorize block structuring even when 'nunmber_of_blocks' is not divisible by vector length"
+vectorization_blockstructured_tail_ordering:
+    type: string
+    default: "consecutive"
+    helpstr: "Ordering of the tail w.r.t the vectorized loop. Possible values: consecutive|blocked"
+vectorization_horizontal:
+    type: string
+    default:
+    nullable: True
+    helpstr: "an explicit value for horizontal vectorization read by the 'explicit' strategy"
+vectorization_jacobians:
+    type: boolean
+    default: True
+    helpstr: "Whether to attempt to vectorize jacobians (takes time, often not needed)"
+vectorization_list_index:
+    type: string
+    default:
+    nullable: True
+    helpstr: "Which vectorization to pick from a list (only valid with vectorization_strategy=fromlist)."
+vectorization_not_fully_vectorized_error:
+    type: boolean
+    default: False
+    helpstr: "throw an error if nonquadloop vectorization did not fully vectorize"
+vectorization_padding:
+    type: string
+    default:
+    nullable: True
+    helpstr: "an explicit value for the allowed padding in vectorization"
+vectorization_quadloop:
+    type: boolean
+    default: False
+    helpstr: "whether to generate code with explicit vectorization"
+vectorization_strategy:
+    type: string
+    default: "none"
+    helpstr: "The identifier of the vectorization cost model. Possible values: none|explicit|model|target|autotune"
+vectorization_target:
+    type: float
+    default:
+    nullable: True
+    helpstr: "The cost function target for the 'target' cost model. Only needed to verify the cost model itself, do not use light-heartedly!!!"
+vectorization_vertical:
+    type: string
+    default:
+    nullable: True
+    helpstr: "an explicit value for vertical vectorization read by the 'explicit' strategy"

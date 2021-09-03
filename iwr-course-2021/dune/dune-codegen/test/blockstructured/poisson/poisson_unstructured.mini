@@ -1,0 +1,29 @@
+__name = blockstructured_poisson_unstructured_{__exec_suffix}
+__exec_suffix = {dimname}
+
+dim = 2, 3 | expand dimension
+dimname = 2d, 3d | expand dimension
+
+lowerleft = 0.0 | repeat {dim}
+upperright = 1.0 | repeat {dim}
+elements = 8, 2 | expand dimension | repeat {dim}
+elementType = quadrilateral
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-7
+grid_unstructured = 1
+
+[formcompiler.r]
+matrix_free = 1
+blockstructured = 1
+number_of_blocks = 16, 8 | expand dimension
+geometry_mixins = blockstructured_multilinear
+apply_cse = licm
+
+[formcompiler.ufl_variants]
+cell = quadrilateral, hexahedron | expand dimension
+degree = 1

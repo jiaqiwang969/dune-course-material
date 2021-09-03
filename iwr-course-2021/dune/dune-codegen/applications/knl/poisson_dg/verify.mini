@@ -1,0 +1,26 @@
+__name = verify_app_knl_poisson_dg
+
+# Setup the grid!
+extension = 1.0 1.0 1.0
+cells = 8 8 8
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+architecture = knl
+
+[formcompiler.r]
+fastdg = 1
+sumfact = 1
+vectorization_quadloop = 1
+vectorization_strategy = explicit
+vectorization_horizontal = 4
+vectorization_vertical = 2
+quadrature_order = 6
+geometry_mixins = sumfact_equidistant
+
+[formcompiler.ufl_variants]
+cell = hexahedron
+degree = 3
