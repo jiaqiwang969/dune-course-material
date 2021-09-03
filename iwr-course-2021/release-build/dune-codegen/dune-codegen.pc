@@ -1,0 +1,15 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+CXX=/usr/bin/g++ 
+CC=/usr/bin/gcc
+DEPENDENCIES=
+
+Name: dune-codegen
+Version: 0.0
+Description: dune-codegen module
+URL: http://dune-project.org/
+Requires: dune-pdelab dune-testtools
+Libs: -L${libdir}
+Cflags: -I${includedir}

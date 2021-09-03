@@ -1,0 +1,15 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+CXX=/usr/bin/g++ 
+CC=/usr/bin/gcc
+DEPENDENCIES=
+
+Name: dune-testtools
+Version: 3.0git
+Description: dune-testtools module
+URL: http://dune-project.org/
+Requires: dune-common
+Libs: -L${libdir}
+Cflags: -I${includedir}

@@ -1,0 +1,30 @@
+if(NOT dune-common_FOUND)
+# Set prefix to source dir
+set(PACKAGE_PREFIX_DIR /Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-common)
+macro(set_and_check _var _file)
+  set(${_var} "${_file}")
+  if(NOT EXISTS "${_file}")
+    message(FATAL_ERROR "File or directory ${_file} referenced by variable ${_var} does not exist !")
+  endif()
+endmacro()
+
+#import the target
+get_filename_component(_dir "${CMAKE_CURRENT_LIST_FILE}" PATH)
+include("${_dir}/dune-common-targets.cmake")
+
+#report other information
+set_and_check(dune-common_PREFIX "${PACKAGE_PREFIX_DIR}")
+set_and_check(dune-common_INCLUDE_DIRS "/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-common")
+set(dune-common_CXX_FLAGS "-std=c++17 -Wall -DDUNE_AVOID_CAPABILITIES_IS_PARALLEL_DEPRECATION_WARNING")
+set(dune-common_CXX_FLAGS_DEBUG "-g")
+set(dune-common_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG")
+set(dune-common_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -g0 -funroll-loops")
+set(dune-common_CXX_FLAGS_RELWITHDEBINFO "-O2 -g -DNDEBUG")
+set(dune-common_LIBRARIES "dunecommon")
+set_and_check(dune-common_SCRIPT_DIR "/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-common/cmake/scripts")
+set_and_check(DOXYSTYLE_FILE "/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-common/doc/doxygen/Doxystyle")
+set_and_check(DOXYGENMACROS_FILE "/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-common/doc/doxygen/doxygen-macros")
+set(dune-common_DEPENDS "")
+set(dune-common_SUGGESTS "")
+set_and_check(dune-common_MODULE_PATH "/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-common/cmake/modules")
+endif(NOT dune-common_FOUND)

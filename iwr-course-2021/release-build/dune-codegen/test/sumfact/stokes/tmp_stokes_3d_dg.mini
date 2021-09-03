@@ -1,0 +1,21 @@
+__name = sumfact_stokes_3d_dg_{__exec_suffix}
+
+__exec_suffix = {fastdg_suffix}
+fastdg_suffix = fastdg, nonfastdg | expand fastdg
+
+cells = 4 4 4
+extension = 1. 1. 1.
+printmatrix = false
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-10
+
+[formcompiler.r]
+numerical_jacobian = 0
+sumfact = 1
+fastdg = 1, 0 | expand fastdg
+geometry_mixins = sumfact_equidistant

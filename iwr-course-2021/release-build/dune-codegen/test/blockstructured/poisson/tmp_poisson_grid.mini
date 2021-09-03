@@ -1,0 +1,31 @@
+__name = blockstructured_poisson_grid_{__exec_suffix}
+__exec_suffix = {vec_suffix}_{dim_suffix}
+
+dim = 2, 3 | expand dimension
+
+vec_suffix = nonvec, vec | expand vectorized
+dim_suffix = 2d, 3d | expand dimension
+
+gmshFile = square.msh, cube.msh | expand dimension
+
+[wrapper.vtkcompare]
+name = {__name}
+reference = poisson_ref
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-7, 1e-4 | expand dimension
+grid_unstructured = 1
+
+[formcompiler.r]
+matrix_free = 1
+generate_jacobians = 0
+blockstructured = 1
+number_of_blocks = 16, 4 | expand dimension
+vectorization_blockstructured = 0, 1 | expand vectorized
+geometry_mixins = blockstructured_multilinear
+apply_cse = licm
+
+[formcompiler.ufl_variants]
+cell = quadrilateral, hexahedron | expand dimension
+degree = 1

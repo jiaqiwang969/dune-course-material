@@ -1,0 +1,17 @@
+__name = poisson_dg_matrix_free
+
+lowerleft = 0.0 0.0
+upperright = 1.0 1.0
+elements = 32 32
+elementType = simplical
+
+[wrapper.vtkcompare]
+name = {__name}
+reference = poisson_dg_ref
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 1e-6
+
+[formcompiler.r]
+matrix_free = 1

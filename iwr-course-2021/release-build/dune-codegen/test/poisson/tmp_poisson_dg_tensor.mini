@@ -1,0 +1,17 @@
+__name = poisson_dg_tensor
+
+lowerleft = 0.0 0.0
+extension = 1.0 1.0
+cells = 32 32
+elementType = quadrilateral
+
+[wrapper.vtkcompare]
+name = {__name}
+reference = poisson_dg_ref
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 4e-6
+
+[formcompiler.r]
+geometry_mixins = equidistant

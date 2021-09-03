@@ -1,0 +1,10 @@
+# CMake generated Testfile for 
+# Source directory: /Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-istl/dune/istl/eigenvalue/test
+# Build directory: /Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/release-build/dune-istl/dune/istl/eigenvalue/test
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+add_test(poweriterationtest "/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/release-build/dune-istl/dune/istl/eigenvalue/test/poweriterationtest" "40")
+set_tests_properties(poweriterationtest PROPERTIES  LABELS "" PROCESSORS "1" REQUIRED_FILES "/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/release-build/dune-istl/dune/istl/eigenvalue/test/poweriterationtest" SKIP_RETURN_CODE "77" TIMEOUT "300" _BACKTRACE_TRIPLES "/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-common/cmake/modules/DuneTestMacros.cmake;397;_add_test;/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-istl/dune/istl/eigenvalue/test/CMakeLists.txt;3;dune_add_test;/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-istl/dune/istl/eigenvalue/test/CMakeLists.txt;0;")
+add_test(poweriterationsuperlutest "/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/release-build/dune-istl/dune/istl/eigenvalue/test/poweriterationsuperlutest" "40")
+set_tests_properties(poweriterationsuperlutest PROPERTIES  LABELS "" PROCESSORS "1" REQUIRED_FILES "/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/release-build/dune-istl/dune/istl/eigenvalue/test/poweriterationsuperlutest" SKIP_RETURN_CODE "77" TIMEOUT "300" _BACKTRACE_TRIPLES "/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-common/cmake/modules/DuneTestMacros.cmake;397;_add_test;/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-istl/dune/istl/eigenvalue/test/CMakeLists.txt;10;dune_add_test;/Users/wjq/Documents/Github-CI/deal.II-mini/temp/iwr-course-2021/dune/dune-istl/dune/istl/eigenvalue/test/CMakeLists.txt;0;")

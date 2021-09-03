@@ -1,0 +1,14 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/blockstructured_poisson_tensor_unstructured_nonvec_3d_blocks_4.dir/blockstructured_poisson_tensor_unstructured_nonvec_3d_blocks_4_driver.cc.o"
+  "CMakeFiles/blockstructured_poisson_tensor_unstructured_nonvec_3d_blocks_4.dir/blockstructured_poisson_tensor_unstructured_nonvec_3d_blocks_4_driver.cc.o.d"
+  "blockstructured_poisson_tensor_unstructured_nonvec_3d_blocks_4"
+  "blockstructured_poisson_tensor_unstructured_nonvec_3d_blocks_4.pdb"
+  "blockstructured_poisson_tensor_unstructured_nonvec_3d_blocks_4_driver.cc"
+  "blockstructured_poisson_tensor_unstructured_nonvec_3d_blocks_4_driverblock_file.hh"
+  "blockstructured_poisson_tensor_unstructured_nonvec_3d_blocks_4_rOperator_db.hh"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/blockstructured_poisson_tensor_unstructured_nonvec_3d_blocks_4.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

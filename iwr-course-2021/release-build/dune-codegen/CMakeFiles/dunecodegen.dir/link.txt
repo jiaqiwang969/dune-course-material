@@ -1,0 +1,2 @@
+/usr/bin/ar qc lib/libdunecodegen.a CMakeFiles/dunecodegen.dir/lib/libdunecodegen_stub.cc.o CMakeFiles/dunecodegen.dir/dune/codegen/common/tsc.cc.o
+/usr/bin/ranlib lib/libdunecodegen.a

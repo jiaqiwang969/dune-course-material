@@ -1,6 +1,6 @@
 debug-build/*
-release-build/*
-release.opts
+<!-- release-build/* -->
+<!-- release.opts -->
 debug.opts
 
 ## The following is a generic latex-ignore from https://raw.githubusercontent.com/github/gitignore/master/TeX.gitignore

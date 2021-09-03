@@ -1,0 +1,14 @@
+__name = poisson_3d_cg_hexahedron
+
+cells = 8 8 8
+extension = 1. 1. 1.
+
+[wrapper.vtkcompare]
+name = {__name}
+extension = vtu
+
+[formcompiler]
+compare_l2errorsquared = 9e-5
+
+[formcompiler.r]
+geometry_mixins = equidistant
